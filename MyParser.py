@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 wb = open_workbook('training_set_rel3.xlsx')
 essayMasterList = []
 
+#Making essay objects
 for sheet in wb.sheets():
     numOfRows = sheet.nrows
     for row in range(1700):
@@ -17,6 +18,7 @@ for sheet in wb.sheets():
         essayMasterList.append(Essay(essayID, essaySet, plainData, score1, score2))
 
 
+#formatting essay data for ML
 Features = []
 Scores = []
 for i in range(len(essayMasterList)-100):#1701-100 = 1601
@@ -30,28 +32,10 @@ for i in range(len(essayMasterList)-100):#1701-100 = 1601
     Features.append(featureList)
     Scores.append(essayMasterList[i].scores[0] + essayMasterList[i].scores[1])
 
+    
+#creating a decision tree based on data(Basic Machine Learning)    
 clf = tree.DecisionTreeClassifier()
 clf = clf.fit(Features, Scores)
-"""
-testFeatures = []
-testScores = []
-temp = []
-temp.append(essayMasterList[-1].wordCount)
-temp.append(essayMasterList[-1].sentenceCount)
-temp.append(essayMasterList[-1].numOfNouns)
-temp.append(essayMasterList[-1].numOfAdverbs)
-temp.append(essayMasterList[-1].numOfAdjectives)
-temp.append(essayMasterList[-1].numOfVerbs)
-testFeatures.append(temp)
-testScores.append(essayMasterList[-1].scores[0] + essayMasterList[-1].scores[1])
-"""
-
-
-
-#print(essayMasterList[-1].plainText)
-#print("Atual Score: " + str(testScores[0]))
-#print("Predicted Score: ")
-
 
 actualScores = []
 predictedScores = []
