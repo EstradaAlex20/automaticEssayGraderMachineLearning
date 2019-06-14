@@ -33,7 +33,6 @@ You will also need to download the training data I used which can be found in th
 
 A step by step series of examples that tell you how to get a development env running
 
-Say what the step will be
 Step 1. pip install the required libraries
 
 ```
